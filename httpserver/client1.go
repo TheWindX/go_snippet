@@ -38,16 +38,16 @@ func report() (exit chan bool, fpath chan string) {
 	return
 }
 
-func fileLoader(fname string) chan bool {
+func fileLoader(url string, fname string) chan bool {
 	done := make(chan bool)
 	go func() {
 		os.Mkdir("mydown", os.ModePerm)
 		out, _ := os.Create("mydown/" + fname)
 		defer out.Close()
 		fpath <- "mydown/" + fname
-		resp, _ := http.Get("https://storage.googleapis.com/golang/" + fname)
+		resp, _ := http.Get(url)
 		defer resp.Body.Close()
-		bucket := ratelimit.NewBucketWithRate(1000*1024, 1000*1024)
+		bucket := ratelimit.NewBucketWithRate(100*1024, 100*1024)
 		io.Copy(out, ratelimit.Reader(resp.Body, bucket))
 		done <- true
 	}()
@@ -58,9 +58,9 @@ func main() {
 	runtime.GOMAXPROCS(10)
 	exit, fpath = report()
 
-	d1 := fileLoader("go1.5.1.src.tar.gz")
-	d2 := fileLoader("go1.4.1.src.tar.gz")
-	d3 := fileLoader("go1.4.3.src.tar.gz")
+	d1 := fileLoader("http://www.sina.com.cn", "sina.html")
+	d2 := fileLoader("http://www.sohu.com", "sohu.html")
+	d3 := fileLoader("http://www.163.com", "163.html")
 
 	/* d2 := fileLoader("2.7z")
 	d3 := fileLoader("3.7z")

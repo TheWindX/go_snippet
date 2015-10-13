@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"runtime"
 )
 
 func main() {
+	runtime.GOMAXPROCS(10)
 	http.Handle("/files/", http.StripPrefix("/files/", http.FileServer(http.Dir("Dir"))))
 	http.HandleFunc("/hello", myhandler)
 
