@@ -57,5 +57,5 @@ func main() {
 		pieceWork(i)
 	}
 	go sumAll()
-	fmt.Printf("PI = %.50f\n", 3+<-sumRes)
+	fmt.Printf("PI = %f\n", 3+<-sumRes)
 }
