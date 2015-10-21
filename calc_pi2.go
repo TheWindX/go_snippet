@@ -7,8 +7,13 @@ import (
 	"math/big"
 )
 
+//计算精度
 const prec = 2000
+
+//分段数
 const piece = 600
+
+//分段长度
 const pieceLeng = 10000
 
 var resList chan *big.Float
@@ -22,6 +27,7 @@ func bigFloat(num float64) *big.Float {
 	return new(big.Float).SetPrec(prec).SetFloat64(num)
 }
 
+//分段
 func pieceWork(idx int) {
 	go func() {
 		cur := 2 + idx*2*pieceLeng
@@ -44,6 +50,7 @@ func pieceWork(idx int) {
 	}()
 }
 
+//汇总
 func sumAll() {
 	sum := bigInt(3)
 	for i := 0; i < piece; i++ {
@@ -53,7 +60,7 @@ func sumAll() {
 }
 
 func main() {
-	runtime.GOMAXPROCS(15)
+	//runtime.GOMAXPROCS(15)
 	resList = make(chan *big.Float, piece)
 	sumRes = make(chan *big.Float)
 

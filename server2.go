@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	runtime.GOMAXPROCS(10)
+	//runtime.GOMAXPROCS(10)
 	http.Handle("/files/", http.StripPrefix("/files/", http.FileServer(http.Dir("Dir"))))
 	http.HandleFunc("/hello", myhandler)
 

@@ -14,6 +14,7 @@ import (
 var exit chan bool
 var fpath chan string
 
+//状态routine
 func report() (exit chan bool, fpath chan string) {
 	exit = make(chan bool)
 	fpath = make(chan string)
@@ -38,6 +39,7 @@ func report() (exit chan bool, fpath chan string) {
 	return
 }
 
+//文件下载器
 func fileLoader(url string, fname string) chan bool {
 	done := make(chan bool)
 	go func() {
@@ -69,7 +71,7 @@ func main() {
 	<-d2
 	<-d3
 	<-d4 */
-	<-d1
+	<-d1 //等待
 	<-d2
 	<-d3
 	exit <- true

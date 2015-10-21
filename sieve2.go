@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+//整数流
 func intStream(from int) chan int {
 	s := make(chan int)
 	go func() {
@@ -14,6 +15,7 @@ func intStream(from int) chan int {
 	return s
 }
 
+//过滤流
 func filteStream(is chan int, pred func(int) bool) chan int {
 	os := make(chan int)
 	go func() {
@@ -27,6 +29,7 @@ func filteStream(is chan int, pred func(int) bool) chan int {
 	return os
 }
 
+//素数流
 func sieveStream(toSieve int, is chan int) chan int {
 	os := make(chan int)
 	go func() {

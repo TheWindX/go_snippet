@@ -7,8 +7,13 @@ import (
 	"math/big"
 )
 
+//计算精度
 const prec = 2000
+
+//分段数
 const piece = 1000
+
+//分段长度
 const pieceLeng = 3000000
 
 var resList chan float64

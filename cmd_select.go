@@ -54,10 +54,10 @@ func main() {
 	flines := file_stream("fstream.data")
 	is_quit, is_next := cmd_stream()
 	for {
-		select {
-		case _ = <-is_quit:
+		select { //多数异步选择
+		case _ = <-is_quit: //退出
 			return
-		case _ = <-is_next:
+		case _ = <-is_next: //下一句
 			l := <-flines
 			fmt.Printf(l)
 		}

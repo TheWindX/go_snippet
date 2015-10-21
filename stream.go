@@ -9,6 +9,7 @@ import (
 	//"time"
 )
 
+//整数流
 func int_stream() chan int {
 	s := make(chan int)
 	go func() {

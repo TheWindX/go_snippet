@@ -12,6 +12,7 @@ import (
 	//"time"
 )
 
+//文件流
 func file_stream(fpath string) chan string {
 	s := make(chan string)
 	go func() {
@@ -33,6 +34,7 @@ func file_stream(fpath string) chan string {
 	return s
 }
 
+//指令流
 func cmd_stream() chan string {
 	cmd := make(chan string)
 	go func() {
@@ -53,7 +55,7 @@ func main() {
 		if cmd == "quit" {
 			break
 		} else if cmd == "n" {
-			l := <-flines
+			l := <-flines //从文件流中取出一行
 			fmt.Printf(l)
 		}
 	}
